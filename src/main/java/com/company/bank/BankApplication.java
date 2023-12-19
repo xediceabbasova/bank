@@ -4,16 +4,23 @@ import com.company.bank.model.*;
 import com.company.bank.repository.AccountRepository;
 import com.company.bank.repository.AddressRepository;
 import com.company.bank.repository.CustomerRepository;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 import java.util.Set;
 
 
 @SpringBootApplication
-public class BankApplication implements CommandLineRunner{
+@EnableCaching
+public class BankApplication implements CommandLineRunner {
 
     private final AccountRepository accountRepository;
     private final CustomerRepository customerRepository;

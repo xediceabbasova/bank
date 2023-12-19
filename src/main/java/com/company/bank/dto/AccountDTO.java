@@ -3,6 +3,8 @@ package com.company.bank.dto;
 import com.company.bank.model.Currency;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 @Builder
 @ToString
 @EqualsAndHashCode
-public class AccountDTO {
+public class AccountDTO implements Serializable {
 
     private String id;
     private String customerId;

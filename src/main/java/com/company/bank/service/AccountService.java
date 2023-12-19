@@ -12,6 +12,9 @@ import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +44,7 @@ public class AccountService {
         this.exchange = exchange;
     }
 
+    @CachePut(value = "accounts", key = "#id")
     public AccountDTO createAccount(CreateAccountRequest createAccountRequest) {
 
         Customer customer = customerService.getCustomerById(createAccountRequest.getCustomerId());
@@ -60,6 +64,7 @@ public class AccountService {
         return accountDTOConverter.convert(accountRepository.save(account));
     }
 
+    @CacheEvict(value = "accounts", allEntries = true)
     public AccountDTO updateAccount(String id, UpdateAccountRequest request) {
         Customer customer = customerService.getCustomerById(request.getCustomerId());
 
@@ -80,10 +85,12 @@ public class AccountService {
 
     }
 
+    @CacheEvict(value = "accounts", allEntries = true)
     public void deleteAccount(String id) {
         accountRepository.deleteById(id);
     }
 
+    @Cacheable(value = "accounts")
     public List<AccountDTO> getAllAccounts() {
         List<Account> accountList = accountRepository.findAll();
         return accountList
