@@ -2,6 +2,7 @@ package com.company.bank.model;
 
 
 import javax.persistence.*;
+
 import lombok.*;
 
 import java.util.Set;
@@ -23,8 +24,9 @@ public class Customer {
     private Integer dateOfBirth;
     private City city;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    private Set<Address> address;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
 
 }

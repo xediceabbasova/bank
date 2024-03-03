@@ -27,9 +27,9 @@ public class Address {
     private String postcode;
     private String addressDetails;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id",nullable = false,referencedColumnName = "id")
-    private Customer customer;
-
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "customer_id",nullable = false,referencedColumnName = "id")
+//    private Customer customer;
+//
 
 }
